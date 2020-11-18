@@ -1,29 +1,18 @@
+package Algorithms.Sorting2;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class AlternativeCountingSort  {
-
-    private static int[] inputArray = {};
-
-
-    private static int[] inputArray2 = {};
-
-    private static int[] inputArray3 = {};
-
-    public AlternativeCountingSort() throws FileNotFoundException {
-    }
-
+public class CountingSort {
     public static void main(String args[]) throws FileNotFoundException {
-    /*int[] inputArray = {1, 3, 19, 19, 0, 0, 1, 41, 11, 2, 32, 18, 500};
+        /*int[] inputArray = {1, 3, 19, 19, 0, 0, 1, 41, 11, 2, 32, 18};
 
-    сountingSort(inputArray);
+        сountingSort(inputArray);
 
-    int[][] multiArray = {{1, 3, 19}, {99, 0, 1}, {41, 11, 2232, 18}};
-    multiCountingSort(multiArray);*/
-
-
+        int[][] multiArray = {{1, 3, 19}, {99, 0, 1}, {41, 11, 2232, 18}};
+        multiCountingSort(multiArray);*/
         String fileName1= "/home/koslan/Idea-workspace/test_tasks/test/inputArray1.csv";
         String fileName2= "/home/koslan/Idea-workspace/test_tasks/test/inputArray2.csv";
         String fileName3= "/home/koslan/Idea-workspace/test_tasks/test/inputArray3.csv";
@@ -43,12 +32,14 @@ public class AlternativeCountingSort  {
 
 
         long startTime2 = System.currentTimeMillis();
+
         for(int i = 0; i < 100; i++)
         сountingSort(intMas2);
         long timeSpent2 = System.currentTimeMillis() - startTime2;
 
 
         long startTime3 = System.currentTimeMillis();
+
         for(int i = 0; i < 100; i++)
         сountingSort(intMas3);
         long timeSpent3 = System.currentTimeMillis() - startTime3;
@@ -58,7 +49,6 @@ public class AlternativeCountingSort  {
         System.out.println("программа 2 выполнялась " + timeSpent2 + " миллисекунд" + "\n" + timeSpent2);
         System.out.println("программа 3 выполнялась " + timeSpent3 + " миллисекунд" + "\n" + timeSpent3);
 
-
         System.out.println("size 1 " + intMas1.length);
         System.out.println("size 2 " + intMas2.length);
         System.out.println("size 3 " + intMas3.length);
@@ -66,6 +56,7 @@ public class AlternativeCountingSort  {
         System.out.println("max 1 " + getMax(intMas1));
         System.out.println("max 2 " + getMax(intMas2));
         System.out.println("max 3 " + getMax(intMas3));
+
 
     }
 
@@ -85,8 +76,8 @@ public class AlternativeCountingSort  {
     }
 
     public static void сountingSort(int[] mas) {
-        //System.out.println(Arrays.toString(
-                sort(mas, new int[mas.length], getMax(mas));
+            //System.out.println(Arrays.toString(
+                    sort(mas, new int[mas.length], getMax(mas));
     }
 
     public static void multiCountingSort(int[][] mas) {
@@ -118,15 +109,15 @@ public class AlternativeCountingSort  {
         k++;
         int[] C = new int[k];
 
-        for (int i = 0; i < inputArray.length; i++)
-            C[inputArray[i]]++;
+        for (int i = 0; i < inputArray.length; ++i)
+            ++C[inputArray[i]];
 
-        for (int i = 0, j = 0; i < C.length; i++) {
-            while (C[i] != 0) {
-                C[i]--;
-                resultArray[j] = i;
-                j++;
-            }
+        for (int i = 1; i < k; i++)
+            C[i] += C[i - 1];
+
+        for (int i = inputArray.length - 1; i >= 0; i--) {
+            resultArray[C[inputArray[i]] - 1] = inputArray[i];
+            --C[inputArray[i]];
         }
 
         return resultArray;
