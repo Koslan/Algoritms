@@ -2,15 +2,15 @@ package Algorithms.DataStructures4;
 
 public class SinglyLinkedListNode {
 
-    int link;
-    int value;
+    private SinglyLinkedListNode link;
+    private int value;
 
-    public SinglyLinkedListNode(int link, int value) {
+    public SinglyLinkedListNode(SinglyLinkedListNode link, int value) {
         this.link = link;
         this.value = value;
     }
 
-    public int getLink() {
+    public SinglyLinkedListNode getLink() {
         return link;
     }
 
