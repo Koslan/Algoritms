@@ -14,6 +14,10 @@ public class ArrayStack {
         this.stack = new int[stackSize];
     }
 
+    public int stackSize() {
+        return stackSize;
+    }
+
     public boolean push(int value) {
         if (top == stack.length)
             return false;
@@ -26,10 +30,10 @@ public class ArrayStack {
 
     public int pop() throws Exception {
 
-        if (top < 0)
+        if (top < 1)
             throw new Exception("error: stack is empty");
 
-        int value = stack[top];
+        int value = stack[top - 1];
         this.top--;
 
         return value;
@@ -40,15 +44,6 @@ public class ArrayStack {
 
     }
 
-    public int peek() throws Exception {
-        if (top < 0)
-            throw new Exception("error: stack is empty");
-
-        int value = stack[top];
-
-        return value;
-
-    }
 
     public boolean clear() {
         if (top < 0)
@@ -61,58 +56,75 @@ public class ArrayStack {
 
     public static void printValue(String value) {
 
-        System.out.printf("%4s|", value );
+        System.out.printf("%4s|", value);
     }
 
     public void printStack() {
-        for(int i = 0; i < top; i++)
+        for (int i = 0; i < stackSize; i++)
             printValue("" + stack[i]);
 
         System.out.println();
-        for(int i = 0; i <= top; i++)
+        for (int i = 0; i < stackSize; i++)
             printValue("----");
 
         System.out.println();
 
-        for(int i = 0; i < top; i++)
-            printValue("" + i);
+        for (int i = 0; i < stackSize; i++) {
+            if(i == capacity() - 1)
+                System.out.print(" top|");
+            else
+                printValue("" + i);
 
-        System.out.print(" top");
+
+        }
     }
 
 
     public static String console(String str, ArrayStack stack) throws Exception {
 
-        if(str.substring(0, 3).equals("pop"))
-            stack.pop();
+        if (str.substring(0, 3).equals("pop")) {
+            if (stack.capacity() > 1)
+                System.out.println("pop value:" + stack.pop());
+            else
+                System.out.println("stack is empty, you can't pop()");
 
-        else if(str.substring(0, 3).equals("cle"))
-            stack.clear();
+        } else if (str.substring(0, 3).equals("cle")) {
+            if (stack.capacity() > 0)
+                stack.clear();
+            else
+                System.out.println("stack is empty, you can't clear()");
 
-        else if(str.substring(0, 3).equals("cap"))
-                return "capacity = "  + stack.capacity();
+        } else if (str.substring(0, 3).equals("cap")) {
+            return "capacity = " + stack.capacity();
 
-        else if(str.substring(0, 5).equals("print"))
+        } else if (str.substring(0, 5).equals("print")) {
             stack.printStack();
 
 
-        else if(str.substring(0, 4).equals("push")) {
-            String pS = str.substring(5, str.length());
-            int pars = Integer.parseInt(pS);
-            stack.push(pars);
+        } else if (str.substring(0, 4).equals("push")) {
+            if (stack.capacity() <= stack.stackSize()) {
+                String pS = str.substring(5, str.length());
+                int pars = Integer.parseInt(pS);
+                stack.push(pars);
+            } else {
+                System.out.println("stack is full, you can't push");
+            }
 
         }
-                return "";
+        return "";
 
     }
 
 
     public static void main(String[] args) throws Exception {
-        int n = 8;
+        int n = 3;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        System.out.println("set stack capacity");
+        n = Integer.parseInt(br.readLine());
         ArrayStack stack = new ArrayStack(n);
 
         while (true) {
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             System.out.println(console(br.readLine(), stack));
         }
 
