@@ -2,19 +2,27 @@ package Algorithms.DataStructures4;
 
 public class SinglyLinkedListNode {
 
-    private SinglyLinkedListNode link;
+    private SinglyLinkedListNode nextElem;
     private int value;
 
     public SinglyLinkedListNode(SinglyLinkedListNode link, int value) {
-        this.link = link;
+        this.nextElem = link;
         this.value = value;
     }
 
-    public SinglyLinkedListNode getLink() {
-        return link;
+    public SinglyLinkedListNode getNextElem() {
+        return nextElem;
     }
 
     public int getValue() {
         return value;
+    }
+
+    public void setNextElem(SinglyLinkedListNode link) {
+        this.nextElem = link;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 }

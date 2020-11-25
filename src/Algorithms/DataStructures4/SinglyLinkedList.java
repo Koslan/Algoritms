@@ -17,26 +17,61 @@ public class SinglyLinkedList {
     private int size = 0;
 
 
-    public boolean addFirst() {
-        return true;
+    public void addFirst(int value) {
+        SinglyLinkedListNode elem = new SinglyLinkedListNode(null, value);
+
+        if(size == 0) {
+            lastElem = elem;
+        } else {
+            elem.setNextElem(this.firstElem);
+        }
+
+        firstElem = elem;
+        elem.setValue(value);
+        size++;
     }
 
-    public void addLast() { }
+    public void addLast(int value) {
+        SinglyLinkedListNode elem = new SinglyLinkedListNode(null, value);
 
-    public void addAfter(SinglyLinkedListNode link) {
+        if(size == 0) {
+            firstElem = elem;
+        } else {
+            elem.setNextElem(this.firstElem);
+        }
 
+        lastElem = elem;
+        elem.setValue(value);
+        size++;
     }
 
-    public int getById(int id) {
+    public void addAfter(SinglyLinkedListNode link, int value) {
+        // current   1 --> 3
+        SinglyLinkedListNode one = link;
+        SinglyLinkedListNode three = link.getNextElem();
+        SinglyLinkedListNode two = new SinglyLinkedListNode(three, value);
+        one.setNextElem(two);
+        // current   1 --> 2 --> 3
+        size++;
+    }
+
+    public int getValueByIndex(int index) {
         int value = 0;
 
         return value;
     }
 
-    public int removeById(int id) {
+    public SinglyLinkedListNode getElemByIndex(int index) throws Exception {
         int value = 0;
 
-        return value;
+        if(index > size)
+            throw new Exception("error: index > list.size");
+
+        SinglyLinkedListNode result = firstElem;
+        for(int i = 0; i <= index; i++)
+            result = firstElem.getNextElem();
+
+        return result;
     }
 
 
