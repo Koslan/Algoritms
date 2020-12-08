@@ -1,5 +1,6 @@
 package Algorithms.Hash;
 
+import java.util.Formatter;
 import java.util.Hashtable;
 import java.util.LinkedList;
 
@@ -16,7 +17,22 @@ public class SeparateChaining {
      */
 
     public static void main(String[] args) {
+        HashTable ht = new HashTable(8);
+        ht.add(3, 11);
+        ht.add(32, 111);
+        ht.add(31, 112);
+        ht.add(4, 121);
+        ht.add(1, 141);
+        ht.add(2, 151);
+        ht.add(8, 161);
 
+        ht.print();
+
+
+        ht.removeElem(32);
+        ht.print();
+        ht.removeElem(1);
+        ht.print();
     }
 }
 
@@ -24,6 +40,32 @@ public class SeparateChaining {
 class HashTable {
     int M;
     Object[] table;
+
+    public void print() {
+        System.out.println("Print HashTable  size =" + M);
+        for(int i = 0; i < table.length; i++) {
+            if (table[i] == null) {
+                System.out.printf("%4s| null", "");
+                System.out.println();
+                System.out.printf("%4s| null", i);
+                System.out.println();
+            } else {
+                LinkedList<Node> list = (LinkedList<Node>) table[i];
+                StringBuilder sb = new StringBuilder();
+                StringBuilder sb2 = new StringBuilder();
+                Formatter fm = new Formatter(sb);
+
+                for(Node node : list) {
+                    sb.append(String.format("%4s|", node.getKey()));
+                    sb2.append(String.format("%4s|", node.getValue()));
+                }
+                System.out.printf("%4s|", "");
+                System.out.println(sb.toString());
+                System.out.printf("%4s|",  i);
+                System.out.println(sb2.toString());
+            }
+        }
+    }
 
     public HashTable(int m) {
         M = m;
