@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class CountingSort {
+public class  CountingSort {
     public static void main(String args[]) throws FileNotFoundException {
         /*int[] inputArray = {1, 3, 19, 19, 0, 0, 1, 41, 11, 2, 32, 18};
 
